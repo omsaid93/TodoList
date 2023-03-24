@@ -17,7 +17,11 @@ const todoSchema = mongoose.Schema(
     },
     endDate : {
         type: Date,
-    }
+    },
+    children:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Todo",
+    }],
   },
   {
     timestamps: true,
