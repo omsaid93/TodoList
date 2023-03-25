@@ -8,6 +8,7 @@ const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "1d" });
   };
 
+  //Sign up user
 const registerUser = asyncHandler(async (req,res)=>{
     const {email} = req.body;
 
@@ -26,7 +27,13 @@ const registerUser = asyncHandler(async (req,res)=>{
 
     const token = generateToken(user._id);
     
-    res.setHeader('Authorization', 'Bearer ' + token);
+    res.cookie("token", token, {
+        path: "/",
+        httpOnly: true,
+        expires: new Date(Date.now() + 1000 * 86400), // 1 day
+        sameSite: "none",
+        secure: true,
+    });
 
     if (user) {
         const { _id, email} = user;
@@ -41,6 +48,8 @@ const registerUser = asyncHandler(async (req,res)=>{
       }
 })
 
+
+//user login 
 const loginUser = asyncHandler(async(req,res)=>{
     const {email} = req.body;
 
@@ -58,7 +67,13 @@ const loginUser = asyncHandler(async(req,res)=>{
 
     const token = generateToken(user._id);
 
-    res.setHeader('Authorization', 'Bearer ' + token);
+    res.cookie("token", token, {
+        path: "/",
+        httpOnly: true,
+        expires: new Date(Date.now() + 1000 * 86400), // 1 day
+        sameSite: "none",
+        secure: true,
+    });
 
     if(user){
         const {_id, email} = user;

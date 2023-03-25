@@ -3,8 +3,6 @@ const { addTodo, getTodos, addNestedTodo, updateTodo, deleteTodo, completeTodo }
 const router = express.Router();
 const protect = require("../middleWare/authMiddleware");
 
-
-
 router.post("/", protect, addTodo);
 router.post("/:id", protect, addNestedTodo);
 router.get("/", protect, getTodos);
