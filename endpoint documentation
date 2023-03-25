@@ -1,0 +1,9 @@
+"/api/users/register            POST - Creates a new user"
+"/api/users/login               POST - access to the account (create the jwt)"
+
+"/api/todos/                    POST - Add new todo (parent)"
+"/api/todos/                    GET - return a list of all user's todos"
+"/api/todos/:id                 POST - Add new todo (children)"
+"/api/todos/:id                 PATCH - Update the todo informations"
+"/api/todos/:id/completed       PATCH - Update only the todo status (complete 'true' / not 'false')"
+"/api/todos/:id                 DELETE - Delete/remove the todo from the DB"

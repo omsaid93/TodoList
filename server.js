@@ -6,27 +6,28 @@ const errorHandler = require("./middleWare/errMiddleware");
 const userRoute = require("./routes/userRoute");
 const todoRoute = require("./routes/todoRoute");
 const cors = require("cors");
+const path = require("path");
 
 const app = express()
 
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(express.urlencoded({extended:true}));
 app.use(cors());
 
 app.use("/api/users", userRoute);
 app.use("/api/todos", todoRoute);
 
-app.get("/", (req, res) => {
-    res.send("Home Page");
-});
+//view engine setup
+app.set('view engine','ejs')
+app.set('views', path.join(__dirname,'/views/partials'))
 
-app.use((req, res, next) => {
-  const error = new Error('Not Found');
-  error.status = 404;
-  next(error);
-});
 
 app.use(errorHandler);
+
+app.get('/', (req,res)=>{
+  res.render('index')
+})
 
 const database_url = "localhost:27017";
 const database_name = "todoTest";

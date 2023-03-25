@@ -13,10 +13,18 @@ const todoSchema = mongoose.Schema(
       trim: true,
     },
     description : {
-        type: String,
+      type: String,
     },
     endDate : {
-        type: Date,
+      type: Date,
+    },
+    completed:{
+      type : Boolean,
+      default:false,
+    },
+    priority:{
+      type: Number,
+      default:1,
     },
     children:[{
         type: mongoose.Schema.Types.ObjectId,
